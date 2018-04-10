@@ -1,32 +1,36 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+import {fetchBears} from './actions'
+import {connect} from 'react-redux'
 
 // Source code:  https://gist.github.com/wwarodom/f27e0903ed3a12cd2360dea88d53c295
 
 class Bear extends Component {
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			bears : []
-		}
-	}
+	// constructor(props) {
+	// 	super(props)
+	// 	this.state = {
+	// 		bears : []
+	// 	}
+	// }
 
 	componentDidMount() {
-		this.getAllBears()
+		// this.getAllBears()
+		this.props.fetchBears()
 	}
-
-	getAllBears() {
-		axios.get('http://localhost/api/bears')
-			.then( (response) => {
-				this.setState( {bears: response.data} )
-			})
-	}
+    //
+	// getAllBears() {
+	// 	axios.get('http://localhost/api/bears')
+	// 		.then( (response) => {
+	// 			this.setState( {bears: response.data} )
+	// 		})
+	// }
 
 	renderBears() {
-		return this.state.bears.map(
-			(bear,index) => (<li key={index}>{bear.id}:{bear.name}:{bear.weight}</li>)
-		)
+		if ( Object.keys(this.props.bears).length !== 0 )
+			return this.props.bears.map(
+				(bear,index) =>
+					(<li key={index}>{bear.id}:{bear.name}</li>)
+			)
 	}
 
 	render() {
@@ -39,4 +43,8 @@ class Bear extends Component {
 	}
 }
 
-export default Bear
+function mapStateToProps (state) {
+	return {bears: state.bears}
+}
+
+export default connect (mapStateToProps,{fetchBears})(Bear)
