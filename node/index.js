@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 const router = express.Router()
+const cors = require('cors')		// <==============================================
 const bodyParser = require('body-parser')
 
 let bears = [ { id:1, name:'Pooh', weight:100},
 	{ id:2, name:'Winnie', weight:200}, ]
 
 app.use(express.static('public'))
+app.use(cors)						// <==============================================
 
 app.use('/api',
 		bodyParser.urlencoded({extended:false}), router)
