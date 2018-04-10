@@ -3,10 +3,24 @@ import axios from 'axios'
 
 class Bear extends Component {
 
-	renderBears() {
+	constructor(props) {
+		super(props)
+		this.state = {
+			bears : []
+		}
+	}
+
+	getAllBears() {
 		axios.get('http://localhost/api/bears')
-			.then( (response) => console.log(response) )
-		return ( <div>Bear 1</div> )
+			.then( (response) => {
+				this.setState( {bears: response.data} )
+			})
+	}
+
+	renderBears() {
+		return this.state.bears.map(
+			(bear) => (<div>{bear.name}</div>)
+		)
 	}
 
 	render() {
