@@ -4,8 +4,8 @@ import axios from 'axios'
 class Bear extends Component {
 
 	renderBears() {
-		const request = axios.get('http://localhost/api/bears')
-		console.log(request)
+		axios.get('http://localhost/api/bears')
+			.then( (response) => console.log(response) )
 		return ( <div>Bear 1</div> )
 	}
 
