@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 
+// Source code:  https://gist.github.com/wwarodom/f27e0903ed3a12cd2360dea88d53c295
+
 class Bear extends Component {
 
 	constructor(props) {
