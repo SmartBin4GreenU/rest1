@@ -10,6 +10,10 @@ class Bear extends Component {
 		}
 	}
 
+	componentDidMount() {
+		this.getAllBears()
+	}
+
 	getAllBears() {
 		axios.get('http://localhost/api/bears')
 			.then( (response) => {
@@ -19,7 +23,7 @@ class Bear extends Component {
 
 	renderBears() {
 		return this.state.bears.map(
-			(bear) => (<div>{bear.name}</div>)
+			(bear,index) => (<li key={index}>{bear.id}:{bear.name}:{bear.weight}</li>)
 		)
 	}
 
@@ -27,7 +31,7 @@ class Bear extends Component {
 		return (
 			<div>
 				<h1> Bear </h1>
-				<div> {this.renderBears()} </div>
+				<ul> {this.renderBears()} </ul>
 			</div>
 		)
 	}
